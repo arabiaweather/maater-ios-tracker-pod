@@ -16,84 +16,22 @@ public class Tracker {
 
     public static let shared = Tracker()
     
-    public init() {}
+    var userId: Int = 0
+    var clientId: Int = 0
+    var name: String = ""
+    var email: String = ""
+    var trackingId: Int = 0
 
-    struct Holder {
-        static var _manager:SocketManager = SocketManager(socketURL: URL(string: "http://localhost:8282")!, config: [.log(true), .compress])
-        static var _socket: SocketIOClient = Holder._manager.defaultSocket
-        static var _userId: Int = 0
-        static var _clientId: Int = 0
-        static var _name: String = ""
-        static var _email: String = ""
-        static var _trackingId: Int = 0
+    var manager : SocketManager
+    var socket : SocketIOClient
+    
+    public init() {
+        
+        manager = SocketManager(socketURL: URL(string: "http://localhost:8282")!, config: [.log(true), .compress])
+        socket = manager.defaultSocket
+
     }
-    
-    var manager:SocketManager {
-        get {
-            return Holder._manager
-        }
-        set(newValue) {
-            Holder._manager = newValue
-        }
-    }
-    
-    var socket:SocketIOClient {
-        get {
-            return Holder._socket
-        }
-        set(newValue) {
-            Holder._socket = newValue
-        }
-    }
-    
-    
-    var userId:Int {
-        get {
-            return Holder._userId
-        }
-        set(newValue) {
-            Holder._userId = newValue
-        }
-    }
-    
-    
-    var clientId:Int {
-        get {
-            return Holder._clientId
-        }
-        set(newValue) {
-            Holder._clientId = newValue
-        }
-    }
-    
-    
-    var name: String {
-        get {
-            return Holder._name
-        }
-        set(newValue) {
-            Holder._name = newValue
-        }
-    }
-    
-    
-    var email: String {
-        get {
-            return Holder._email
-        }
-        set(newValue) {
-            Holder._email = newValue
-        }
-    }
-    
-    var trackingId:Int {
-        get {
-            return Holder._trackingId
-        }
-        set(newValue) {
-            Holder._trackingId = newValue
-        }
-    }
+
     
     
     public func trackUser(userId: Int, clientId: Int, fullname: String, email: String ){
