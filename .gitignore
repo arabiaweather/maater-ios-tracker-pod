@@ -35,3 +35,8 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 # Pods/
+
+Example/MaaterIosTracker.xcworkspace/
+Example/Podfile.lock
+Example/Pods/
+
