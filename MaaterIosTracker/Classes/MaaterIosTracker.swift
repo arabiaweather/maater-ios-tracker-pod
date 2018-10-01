@@ -21,21 +21,32 @@ public class Tracker {
     var name: String = ""
     var email: String = ""
     var trackingId: Int = 0
-
+    var environment: TrackingEnvironment = .development
+    
     var manager : SocketManager
     var socket : SocketIOClient
     
     public init() {
-        
         manager = SocketManager(socketURL: URL(string: "http://localhost:8282")!, config: [.log(true), .compress])
         socket = manager.defaultSocket
-
     }
+    
 
+    public func trackUser(env: TrackingEnvironment, userId: Int, clientId: Int, fullname: String, email: String ){
+        connectTracking(env: env) {
+            self.trackUser(userId: userId, clientId: clientId, fullname: fullname, email: email)
+        }
+    }
     
+    public func resumeTrackingIfAvailable(){
+        if ( self.userId != 0 && self.clientId != 0 && !self.name.isEmpty && !self.email.isEmpty ){
+            trackUser(env: environment, userId: userId, clientId: clientId, fullname: name, email: email)
+        } else  {
+            print("no previous saved")
+        }
+    }
     
-    public func trackUser(userId: Int, clientId: Int, fullname: String, email: String ){
-        
+    private func trackUser(userId: Int, clientId: Int, fullname: String, email: String ){
         
         guard self.socket.status == .connected else {
             print("NOT CONNECTED TO TRACK")
@@ -60,17 +71,18 @@ public class Tracker {
         self.email = email
     }
     
-    public func connectTracking(env: TrackingEnvironment){
+    private func connectTracking(env: TrackingEnvironment, trackCallback : @escaping () -> ()){
         
         if (socket.status == .connected || socket.status == .connecting){
             return
         }
+        environment = env
         
         var server =  "http://localhost:8282"
         let isSecure = env != .development
         let isVerboseLogging = env == .development
         
-        switch env {
+        switch environment {
         case .development:
             server = "http://macbook-air.duckdns.org:8282"
         case .staging:
@@ -84,10 +96,8 @@ public class Tracker {
         socket = manager.defaultSocket
         
         socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-            if (self.userId != 0 && self.clientId != 0 && !self.name.isEmpty && !self.email.isEmpty ){
-                self.trackUser(userId: self.userId, clientId: self.clientId, fullname: self.name, email: self.email)
-            }
+            print("socket connected, time to trackuser")
+            trackCallback()
         }
         
         socket.on("tracked", callback: { data , ack  in

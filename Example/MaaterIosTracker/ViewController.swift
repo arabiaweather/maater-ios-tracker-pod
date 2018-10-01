@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func actionTrackMe(_ sender: Any) {
-        Tracker.shared.trackUser(userId: 77, clientId: 11, fullname: "grendizer", email: "tiiiiia@asdasdf.com")
+        Tracker.shared.trackUser(env: .development, userId: 77, clientId: 11, fullname: "grendizer", email: "tiiiiia@asdasdf.com")
     }
 }
 
