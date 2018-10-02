@@ -220,7 +220,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = MT3362WLTN;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -516,8 +516,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 204CB89794CCF2B1021B5AB7 /* Pods-MaaterIosTracker_Tests.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = MT3362WLTN;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -541,8 +542,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA4331CCEBF82582B9433455 /* Pods-MaaterIosTracker_Tests.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = MT3362WLTN;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
