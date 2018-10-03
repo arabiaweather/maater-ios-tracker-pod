@@ -137,6 +137,7 @@ struct TrackCommand : Codable {
         case osVersion = "os_version"
         case clientType = "client_type"
         case deviceModel = "device_model"
+        case deviceBrand = "device_brand"
         case deviceType = "device_type"
         case appId = "app_id"
     }
@@ -152,6 +153,7 @@ struct TrackCommand : Codable {
     let deviceType = 1
     let clientType = "mobile"
     let appId = 2
+    let deviceBrand = "Apple"
     
     
     init( userId: Int, clientId: Int, name: String, email: String ) {

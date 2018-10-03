@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MaaterIosTracker'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'MaaterIosTracker is the tracking client for iOS.'
   s.swift_version    = '4.0'
 
